@@ -45,6 +45,89 @@
         </form>
     </div>
 </div>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyDjnOAy1jPboJaDSTlOD-VS957LW-cBdO0"
+    };
+    firebase.initializeApp(firebaseConfig);
 
+
+    // my scripts
+    const auth = firebase.auth()
+    const registerSumbit = document.getElementById('register_submit')
+
+    registerSumbit.addEventListener('click', function (event) {
+        event.preventDefault();
+        let hasErrors = false;
+
+        const registerForm = document.getElementById('registration')
+
+        // Field Values Start
+        const email = document.getElementById('email').value
+        const password = document.getElementById('password').value
+        const passwordConfirm = document.getElementById('password_confirm').value
+        const registerAgreement = document.getElementById('register_agreement')
+        // Field Values End
+
+        // Errors Variable Start
+        const emailError = document.getElementById("error_email")
+        const passwordError = document.getElementById("error_password")
+        const passwordConfirmError = document.getElementById("error_password2")
+        const registerAgreementError = document.getElementById("error_agree")
+        // Errors Variable End
+
+        let errors = {}
+
+        if (!(email.includes('@'))) {
+            errors.email = "Invalid Email"
+            emailError.innerHTML = errors.email
+            emailError.style.color = 'red'
+            hasErrors = true
+        } else {
+            emailError.innerHTML = ''
+        }
+
+        if (password.length < 8) {
+            errors.password = 'Passwords should be at least 8 symbol'
+            passwordError.innerHTML = errors.password
+            passwordError.style.color = 'red'
+            hasErrors = true
+        } else {
+            passwordError.innerHTML = ''
+        }
+
+        if (password !== passwordConfirm) {
+            errors.passwordConfirm = 'Passwords doesn\'t match'
+            passwordConfirmError.innerHTML = errors.passwordConfirm
+            passwordConfirmError.style.color = 'red'
+            hasErrors = true
+        } else if (password === passwordConfirm && password.length > 7) {
+            passwordConfirmError.innerHTML = ''
+        }
+
+        if (registerAgreement.checked === false) {
+            errors.agreement = 'You need to agree terms'
+            registerAgreementError.innerHTML = errors.agreement
+            registerAgreementError.style.color = 'red'
+            hasErrors = true
+        } else {
+            registerAgreementError.innerHTML = ''
+        }
+
+        if (hasErrors === true) {
+            return hasErrors;
+        } else if (hasErrors === false){
+            auth.createUserWithEmailAndPassword(email, password).then(() => {
+                registerForm.setAttribute('action', 'profile.html')
+                registerForm.submit()
+            }).catch(err => {
+                alert(err.message)
+            })
+        }
+    })
+
+</script>
+<script src="js/script.js"></script>
 </body>
 </html>

@@ -33,6 +33,44 @@
     </div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyDjnOAy1jPboJaDSTlOD-VS957LW-cBdO0"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    // my scripts
+    const auth = firebase.auth()
+    const loginSubmit = document.getElementById('login_submit')
+
+    loginSubmit.addEventListener('click', function (event) {
+        event.preventDefault()
+        let hasErrors = false
+
+        const loginForm = document.getElementById('login')
+
+        const loginEmail = document.getElementById('login_email').value
+        const loginPassword = document.getElementById('login_password').value
+
+        const loginError = document.getElementById("error_login_password")
+
+        let errors = {}
+
+        if (hasErrors === true) {
+            return hasErrors
+        } else if (hasErrors === false){
+            auth.signInWithEmailAndPassword(loginEmail, loginPassword).then(() => {
+                loginForm.setAttribute('action', 'profile.html')
+                loginForm.submit()
+            }).catch(() => {
+                errors.loginPassword = 'Email or Password doesn\'t match'
+                loginError.innerHTML = errors.loginPassword
+                loginError.style.color = 'red'
+            })
+        }
+    })
+</script>
 <script src="js/script.js"></script>
 </body>
 </html>
