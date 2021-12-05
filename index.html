@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href=css/main.css>
+</head>
+<body>
+<div class="container">
+    <div class="login_register">
+        <h2>Registration</h2>
+        <form id="registration">
+            <div>
+                <label for="email">
+                    <input type="email" name="email" placeholder="email" id="email">
+                </label>
+                <div id="error_email" class="error"></div>
+            </div>
+            <div>
+                <label for="password">
+                    <input type="password" name="password" placeholder="password" id="password" autocomplete="off">
+                </label>
+                <div id="error_password" class="error"></div>
+            </div>
+            <div>
+                <label for="password_confirm">
+                    <input type="password" name="password2" placeholder="confirm pasword" id="password_confirm" autocomplete="off">
+                </label>
+                <div id="error_password2" class="error"></div>
+            </div>
+            <div class="checkbox">
+                <label for="register_agreement">
+                    <input type="checkbox" name="agree" id="register_agreement">
+                    I read and agree terms and conditions
+                </label>
+                <div id="error_agree" class="error"></div>
+            </div>
+            <div>
+                <button id="register_submit" type="submit">Confirm</button>
+            </div>
+            <div>
+                Already have account? <a class="link-reset" href="login.html">Sign In</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
